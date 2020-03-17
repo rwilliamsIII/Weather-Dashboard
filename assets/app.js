@@ -24,11 +24,11 @@ function loadResults(){
 
 function loadForecast(city){
 
-    var queryUrl = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&cnt=5&appid=" + apiKey + "&units=imperial"
-    console.log(queryUrl)
+    var queryURL = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&cnt=5&appid=" + apiKey + "&units=imperial"
+    console.log(queryURL)
 
     $.ajax({
-        url: queryUrl,
+        url: queryURL,
         method: "GET"
     })
 
@@ -46,4 +46,48 @@ function loadForecast(city){
             $("<h3>").text("Wind Speed: " + forecastData.list.wind.speed + "mph").appendTo(fiveDay)
         }
     })
+};
+
+
+function loadCurrentWeather(city){
+    var cityInput = $("#submit-city").val().trim();
+
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityInput + "&appid=" + apiKey;
+    console.log(queryURL)
+
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    })
+
+    .then(function(weatherData){
+        console.log(weatherData);
+
+        var farenheitTemp = Math.floor((forecastData.list.main.temp - 273.15) * 1.8 + 32);
+        var feelsLike = Math.floor((forecastData.list.main.feels_like - 273.15) * 1.8 + 32);
+
+        currentWeather.empty();
+        $("<h3>").text("City: " + weatherData.name).appendTo(currentWeather)
+        $("<h3>").text("Date: " + currentDate).appendTo(currentWeather)
+        $("<h3>").text("Current Temperature (F): " + farenheitTemp).appendTo(currentWeather)
+        $("<h3>").text("Feels like :" + feelsLike).appendTo(currentWeather)
+        $("<h3>").text("Humidity: " + weatherData.main.humidity + "%").appendTo(currentWeather)
+        $("<h3>").text("Wind speed: " + weatherData.wind.speed + "MPH").appendTo(currentWeather)
+
+        var latitude = weatherData.coord.lat;
+        var longitude = weatherData.coord.lon;
+        var queryURL2 = "http://api.openweathermap.org/data/2.5/uvi?appid=" + apiKey + "&lat=" + latitude + "&lon" + longitude;
+
+        $.ajax({
+            url: queryURL2,
+            method: "GET"
+        })
+
+        .then(function(moreData){
+            console.log(moreData);
+
+            $("<h3>").text("UV Index: " + moreData.value).appendTo(currentWeather);
+            loadForecast(cityInput);
+        });
+    });
 };
