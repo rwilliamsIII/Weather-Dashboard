@@ -91,3 +91,29 @@ function loadCurrentWeather(city){
         });
     });
 };
+
+submitCity.on("click", function(event){
+    event.preventDefault();
+    var newDiv = $("<div>");
+    var cityInput = $("#cityInput").val().trim();
+    newDiv.text(cityInput);
+    newDiv.attr("data-city", cityInput);
+    newDiv.addClass("saved-city");
+
+    searchHistory.push(cityInput);
+    localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+
+    cityHistory.prepend(newDiv);
+
+    loadCurrentWeather();
+});
+
+
+$(document).on("click", ".saved-city", function(){
+    var city = $(this).attr("data-city")
+    loadCurrentWeather(city);
+})
+
+$(document).ready(function(){
+    loadResults();
+});
