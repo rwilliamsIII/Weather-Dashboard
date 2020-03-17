@@ -21,3 +21,29 @@ function loadResults(){
         resultsDiv.prependTo(cityHistory);
     }
 }
+
+function loadForecast(city){
+
+    var queryUrl = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&cnt=5&appid=" + apiKey + "&units=imperial"
+    console.log(queryUrl)
+
+    $.ajax({
+        url: queryUrl,
+        method: "GET"
+    })
+
+    .then(function(forecastData){
+        console.log(forecastData);
+
+        for(var i = 0; i < forecastData.list.length; i++){
+            var farenheitTemp = Math.floor((forecastData.list.main.temp - 273.15) * 1.8 + 32);
+            var feelsLike = Math.floor((forecastData.list.main.feels_like - 273.15) * 1.8 + 32);
+
+            $("<h3>").text("Date: " + forecastData.list.dt).appendTo(fiveDay)
+            $("<h3>").text("Current Temperature (F): " + farenheitTemp).appendTo(fiveDay)
+            $("<h3>").text("Feels like: " + feelsLike).appendTo(fiveDay)
+            $("<h3>").text("Humidity: " + forecastData.list.main.humidity + "%").appendTo(fiveDay)
+            $("<h3>").text("Wind Speed: " + forecastData.list.wind.speed + "mph").appendTo(fiveDay)
+        }
+    })
+};
