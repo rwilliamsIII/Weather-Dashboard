@@ -23,11 +23,20 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
-
+                    <form>
+                        <div class="form-group">
+                            <label for="cityInput">Search by City:</label>
+                            <input type="text" class="form-control" id="desiredCity" aria-describedby="citySearch">
+                        </div>
+                        <button type="submit" class="btn btn-secondary" id="submit-city">Submit</button>
+                    </form>
+                    <div id="searchResults">
+                        <!-- div for previously searched cities -->
+                    </div>
                 </div>
 
                 <div class="col-md-9">
-                    
+
                 </div>
             </div>
         </div>
