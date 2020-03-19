@@ -1,0 +1,31 @@
+.mb-3, 
+.card-body {
+    background-color: rgb(0, 162, 255) !important;
+}
+
+
+.card-deck {
+    margin-bottom: 30px;
+}
+
+
+.green {
+    color: green;
+}
+.yellow {
+    color: yellow;
+}
+.orange {
+    color: orange;
+}
+.red {
+    color: red;
+}
+.purple {
+    color: purple;
+}
+
+form {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

@@ -28,7 +28,7 @@ function loadSearchHistory(){
 // created function for 5 day forecast
 
 function loadFiveDayForecast(city){
-    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + APIKey + "&units=imperial"
+    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + apiKey + "&units=imperial"
 
     $.ajax({
         url: queryURL,
@@ -62,9 +62,9 @@ function loadFiveDayForecast(city){
 };
 
 function loadCurrentWeather(city) {
-    var cityInput = city || $('#cityInput').val().trim();
+    var cityInput = city || $('#cityInput').val();
 
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityInput + "&appid=" + APIKey;
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityInput + "&appid=" + apiKey;
 
     $.ajax({
         url: queryURL,
