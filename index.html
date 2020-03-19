@@ -30,43 +30,38 @@
                         </div>
                         <button type="submit" class="btn btn-secondary" id="submit-city">Submit</button>
                     </form>
-                    <div id="searchResults">
+                    <div class="card list-group-flush" id="searchResults">
                         <!-- div for previously searched cities -->
                     </div>
                 </div>
 
                 <div class="col-md-9">
-                    <!-- Detailed current day weather info -->
-                    <h1>Today's Weather Forecast</h1>
-                        <div id="currentWeather">
-
-
-                        </div>
-
-                    <!-- 5 Day Forecast -->
-                    <h2>5 Day Forecast</h2>
-                    <div id="fiveDay">
-
-
-                    </div>
+                    <div class="card bg-light mb-3">
+                        <div class="row no-gutters">
+                            <div class="col-md-2">
+                                <div id="weatherIcon">
+                                </div>
+                            </div>
+                    
+                <div class="col-md-10" id="currentWeather">
+                <!-- Detailed current day weather info -->
                 </div>
             </div>
         </div>
+                    <!-- 5 Day Forecast -->
+                    <h2>5 Day Forecast</h2>
+                    <div class="card-deck" id="fiveDay">
+
+
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <footer>
         
     </footer>
-
-
-
-
-
-
-
-
-
-
 
     <!-- jquery link -->
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="crossorigin="anonymous"></script>
