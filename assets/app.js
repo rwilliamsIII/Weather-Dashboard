@@ -29,6 +29,7 @@ function loadSearchHistory(){
 // created function for 5 day forecast
 
 function loadFiveDayForecast(city){
+    var userCity = $("#desiredCity").val().trim();
     var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + userCity + "&appid=" + apiKey + "&units=imperial"
 
     $.ajax({
@@ -124,7 +125,7 @@ function loadCurrentWeather(city) {
 
         });
 
-        loadFiveDayForecast(cityInput);
+        loadFiveDayForecast(userCity);
     });
 };
 
