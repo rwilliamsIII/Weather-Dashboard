@@ -5,6 +5,7 @@ console.log(currentDate);
 // global variables for ajax call and adding content to page
 var apiKey = "b03435d2b43059ea11fb5360dc72b23b";
 var submitCity = $("#submit-city");
+var userCity;
 var cityHistory = $("#searchResults");
 var currentWeather = $("#currentWeather");
 var fiveDay = $("#fiveDay");
@@ -28,7 +29,7 @@ function loadSearchHistory(){
 // created function for 5 day forecast
 
 function loadFiveDayForecast(city){
-    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + apiKey + "&units=imperial"
+    var queryURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + userCity + "&appid=" + apiKey + "&units=imperial"
 
     $.ajax({
         url: queryURL,
@@ -62,9 +63,9 @@ function loadFiveDayForecast(city){
 };
 
 function loadCurrentWeather(city) {
-    var cityInput = city || $('#cityInput').val();
-
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityInput + "&appid=" + apiKey;
+    
+    var userCity = $("#desiredCity").val().trim();
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + userCity + "&appid=" + apiKey;
 
     $.ajax({
         url: queryURL,
@@ -72,6 +73,7 @@ function loadCurrentWeather(city) {
     })
 
     .then(function(weatherData) {
+
         // setting variables for temp conversion from Kelvin to Farenheight
         var farenheightTemp = Math.floor((weatherData.main.temp - 273.15) * 1.8 + 32);
         var feelsLikeTemp = Math.floor((weatherData.main.feels_like - 273.15) * 1.8 + 32);
@@ -130,14 +132,14 @@ function loadCurrentWeather(city) {
 submitCity.on("click", function(event){
     event.preventDefault();
     var newDiv = $("<div>");
-    var cityInput = $("#cityInput").val().trim();
+    var userCity = $("#desiredCity").val().trim();
 
-    newDiv.text(cityInput);
-    newDiv.attr("data-city", cityInput);
+    newDiv.text(userCity);
+    newDiv.attr("data-city", userCity);
     newDiv.addClass("saved-city");
     newDiv.addClass("list-group-item")
 
-    searchHistory.unshift(cityInput);
+    searchHistory.unshift(userCity);
 
     localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
 
